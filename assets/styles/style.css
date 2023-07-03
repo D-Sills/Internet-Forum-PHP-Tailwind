@@ -1,0 +1,62 @@
+/* the styles for the HTML elements */
+body {
+    font-family: 'Roboto';
+    background-color: #D9D9D9;
+}
+
+/* Navbar */
+.vl {
+    height: 40px; /* Set the height of the vertical line as required */
+    width: 1px; /* Set the width of the vertical line */
+    background-color: #000; /* Change this to the line color */
+    margin: 0 10px; /* Adjust the margin as needed to control the spacing between icons and the line */
+}
+.nav-item .btn i {
+    font-size: 24px;
+}
+
+/* Body */
+  /* Style the banner container */
+  #banner {
+   
+    background-color: red;
+    position: relative;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+  }
+
+  /* Style the banner image */
+  #banner img {
+    height: 200px; /* Set the maximum height of the image */
+    object-fit: cover; /* Ensure the image covers the container */
+  }
+
+  /* Style the banner text */
+  #banner h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Add media query for responsiveness */
+  @media (max-width: 768px) {
+    #banner img {
+      max-height: 150px; /* Adjust the height for smaller screens */
+    }
+
+    #banner h1 {
+      font-size: 1.5rem; /* Adjust the font size for smaller screens */
+    }
+  }
+
+
+.content {
+    background-color: white;
+    border-radius: 15px 15px 0 0;
+    filter: drop-shadow(1px 1px 5px #00000032);
+}
