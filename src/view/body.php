@@ -15,17 +15,20 @@
             <div class="col-12 col-md-8">
                 <?php switch ($page) {
                     case 'Home':
-                        include 'categories.php';
+                        include 'home/categories.php';
                         break;
                     case 'Threads':
-                        include 'threads_list.php';
+                        include 'threads/threads_list.php';
+                        break;
+                    case 'Posts':
+                        include 'posts/post_list.php';
                         break;
                 } ?>
             </div>
             
             <!-- Include the sidebar -->
             <div class="col-0 col-md-4">
-                <?php include 'sidebar.php'; ?> 
+                <?php include 'sidebar/sidebar.php'; ?> 
             </div>
         </div>
     </div>
@@ -55,3 +58,9 @@
 
 <!-- Copyright stuff -->
 <span class="py-2 mx-36">Website by us</span>
+
+<?php switch ($page) {
+    case 'Threads':
+        include 'modals/new_thread.php';
+        break;
+} ?>

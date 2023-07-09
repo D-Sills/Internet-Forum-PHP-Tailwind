@@ -41,20 +41,21 @@ function get_threads_by_topic_id($topic_id, $limit = null, $offset = null) {
 }
 
 
-function get_topic_title($topic_id) {
+function get_topic($topic_id) {
     global $db; // Make sure to access the $db PDO object declared in the global scope
 
-    $query = "SELECT topic_subject FROM topics WHERE topic_id = :topic_id";
+    $query = "SELECT t.topic_id, t.topic_subject, t.topic_icon, t.topic_date, t.user_id AS topic_user_id, 
+                c.category_id, c.category_name
+                FROM topics t
+                INNER JOIN categories c ON t.category_id = c.category_id
+                WHERE t.topic_id = :topic_id";
+    
     $statement = $db->prepare($query);
     $statement->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
     $statement->execute();
 
     $result = $statement->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        return $result['topic_subject'];
-    } else {
-        return null; // Topic not found or error occurred
-    }
+    return $result ? $result : null; // Return the topic details along with its category or null if not found
 }
 ?>
 

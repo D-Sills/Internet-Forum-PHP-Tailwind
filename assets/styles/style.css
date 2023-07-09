@@ -4,6 +4,10 @@ body {
     background-color: #D9D9D9;
 }
 
+.modal-open {
+  overflow: scroll;
+}
+
 /* Navbar */
 .vl {
     height: 40px; /* Set the height of the vertical line as required */
@@ -13,6 +17,11 @@ body {
 }
 .nav-item .btn i {
     font-size: 24px;
+}
+.highlight-box {
+  background-color: #ffffcc;
+  padding: 10px;
+  border: 1px solid #cccccc;
 }
 
 /* Body */

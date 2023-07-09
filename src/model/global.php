@@ -44,5 +44,4 @@ function get_users() {
     // Fetch and return the categories data
     return $statement->fetchAll();
 }
-
 ?>

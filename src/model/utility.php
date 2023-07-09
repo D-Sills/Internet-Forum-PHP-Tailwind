@@ -43,4 +43,31 @@ function time_ago($timestamp) {
 }
 
 
+function generate_avatar($username, $userId, $image_size = 50) {
+    $avatar_url = 'path/to/default_avatar.jpg';
+    $base_url = 'WebProgramming-FinalProject';
+    
+    $avatar_html = '<a href="/'.$base_url.'/user/'.clean_topic_name_for_url($username).$userId.'">';
+    $avatar_html .= '<img class="avatar" src="'.$avatar_url.'" alt="'.$username.'" width="'.$image_size.'" height="'.$image_size.'">';
+    $avatar_html .= '</a>';
+
+    return $avatar_html;
+}
+
+function searchForum($searchQuery) {
+    global $db;
+
+    // Perform your database query here to search for matching posts
+    // Modify the SQL query according to your database schema and search requirements
+    $query = "SELECT * FROM posts WHERE post_content LIKE :search_query";
+
+    $statement = $db->prepare($query);
+    $statement->bindValue(':search_query', "%{$searchQuery}%");
+    $statement->execute();
+
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $results;
+}
+
 ?>
