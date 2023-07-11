@@ -1,7 +1,7 @@
 <?php
 // Start the session and include necessary files
 session_start();
-require_once 'database.php';
+require_once '../database.php';
 global $db;
 
 // Get the reply content and associated thread ID from the request data

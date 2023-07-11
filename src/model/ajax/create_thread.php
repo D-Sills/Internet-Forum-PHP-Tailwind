@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-require_once('database.php');
+require_once('../database.php');
 global $db;
 
 // Get the form data
