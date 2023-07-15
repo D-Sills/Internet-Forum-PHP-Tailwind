@@ -20,7 +20,9 @@
     </div>
 </div>
 <?php } else { ?>
-  log in bitch
+  <button type="button" class="my-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">
+    <span>Log in to reply</span>
+  </button>
 <?php } ?>
 
 <script>

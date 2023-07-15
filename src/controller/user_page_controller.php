@@ -1,6 +1,7 @@
 <!-- controllers/posts_controller.php -->
 <?php
 require_once __DIR__ . '/../model/users_db.php';
+require_once __DIR__ . '/../model/posts_db.php';
 
 $page = 'User';
 $user = get_user_by_id($userId);

@@ -17,10 +17,10 @@ $stats = get_user_stats($post['user_id']);
                     <?php 
                     switch ($creator['privilege']) {
                         case 'moderator':
-                            echo 'pop';
+                            echo 'moderator';
                             break;
                         case 'admin':
-                            echo 'pop';
+                            echo 'administrator';
                             break;
                         default:
                             // Handle the default case here
@@ -49,7 +49,7 @@ $stats = get_user_stats($post['user_id']);
             <!-- Header -->
             <div class="pb-2 flex justify-between">
                 <span class="text-xs"><?php echo convert_timestamp($post['creation_date']) ?></span>
-                <span class="text-xs"><button><i class="bi bi-hand-thumbs-up pr-2"></i></button>#<?php echo ($i + 1); ?></span>
+                <span class="text-xs"><button id="likeButton"><i class="bi bi-hand-thumbs-up pr-2"></i></button>#<?php echo ($i + 1); ?></span>
             </div>
         
             <!-- Body -->
@@ -86,5 +86,30 @@ $stats = get_user_stats($post['user_id']);
     </div>
 </div>
 
-
+<script>
+$('#likeButton').on('click', function() {
+  event.preventDefault(); 
+  
+  // Perform any necessary checks or validation on the reply content
+  
+  // Send AJAX request to post the reply
+  $.ajax({
+    url: '/WebProgramming-FinalProject/src/model/ajax/like_post.php', // Backend URL to handle posting the reply
+    type: 'POST',
+    data: replyData,
+    dataType: 'json',
+    success: function(response) {
+      // Handle success response
+      console.log('Post successfully liked:', response);
+      // Clear the reply editor
+      location.reload();
+      // Perform any desired actions
+    },
+    error: function(xhr, status, error) {
+      // Handle error response
+      console.log('Failed to post reply:', error);
+    }
+  });
+});
+</script>
 

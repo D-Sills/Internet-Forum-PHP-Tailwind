@@ -45,22 +45,17 @@ $('#newThreadForm').on('submit', function(event) {
     topicId: <?php echo $topicId; ?> // Pass the topic ID from PHP to JavaScript
   };
   
-  // Send AJAX request
   $.ajax({
-    url: '/WebProgramming-FinalProject/src/model/ajax/create_thread.php', // Backend URL to handle thread creation
+    url: '/WebProgramming-FinalProject/src/model/ajax/create_thread.php',
     type: 'POST',
     data: formData,
     dataType: 'json',
     success: function(response) {
-      // Handle success response
       console.log('Thread created successfully:', response);
-      // Close the modal and perform any desired actions
-      var threadId = response.threadId; // Assuming the response includes the newly created thread ID
-      var threadUrl = '/WebProgramming-FinalProject/threads/' + threadId + '?page=1'; // Replace with the actual URL structure for your thread pages
+      var threadUrl = '/WebProgramming-FinalProject/threads/' + response.data.title + '.' + response.data.thread_id + '?page=1'; // Replace with the actual URL structure for your thread pages
       window.location.href = threadUrl;
     },
     error: function(xhr, status, error) {
-      // Handle error response
       console.log('Thread creation failed:', error);
     }
   });

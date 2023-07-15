@@ -1,5 +1,5 @@
 <div class="p-0">
-<div class="w-100 border-b border-black">
+<div class="w-100 border-b">
     <div class="d-flex align-items-center px-3">
         <!-- Icon -->
         <div class="pr-4">

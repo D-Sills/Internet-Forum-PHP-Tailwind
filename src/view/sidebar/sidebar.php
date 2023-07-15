@@ -3,7 +3,7 @@
 
     <!-- Latest Posts -->
     <div>
-        <h3>Latest Posts</h3>
+        <h3 class="text-lg">Latest Posts</h3>
         <hr>
         <div>
             <?php include 'latest_posts.php'; ?> 
@@ -12,7 +12,7 @@
     
     <!-- Forum Stats -->
     <div>
-        <h3>Forum Statistics</h3>
+        <h3 class="text-lg">Forum Statistics</h3>
         <hr>
         <div>
             <?php include 'forum_statistics.php'; ?> 

@@ -20,6 +20,8 @@ $statement->bindParam(':title', $title);
 $statement->bindParam(':user_id', $_SESSION['user']['user_id']);
 $statement->bindParam(':topic_id', $topic_id); // Replace with the actual topic ID
 
+// ...
+
 if ($statement->execute()) {
   // Get the ID of the newly created thread
   $threadId = $db->lastInsertId();
@@ -33,15 +35,33 @@ if ($statement->execute()) {
 
   if ($postStatement->execute()) {
     // Thread and post creation successful
-    $response = ['success' => true, 'message' => 'Thread and post created successfully'];
+    $response = [
+      'success' => true,
+      'message' => 'Thread and post created successfully',
+      'data' => [
+        'title' => $title,
+        'thread_id' => $threadId
+      ]
+    ];
   } else {
     // Post creation failed
-    $response = ['success' => false, 'message' => 'Failed to create post'];
+    $response = [
+      'success' => false,
+      'message' => 'Failed to create post',
+      'data' => null
+    ];
   }
 } else {
   // Thread creation failed
-  $response = ['success' => false, 'message' => 'Failed to create thread'];
+  $response = [
+    'success' => false,
+    'message' => 'Failed to create thread',
+    'data' => null
+  ];
 }
+
+// ...
+
 
 // Return the JSON response
 header('Content-Type: application/json');

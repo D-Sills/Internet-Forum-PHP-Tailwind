@@ -1,1 +1,1 @@
-<div class="drop-shadow">No results found.</div>
+<div>No results found.</div>

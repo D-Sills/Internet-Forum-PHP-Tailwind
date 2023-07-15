@@ -27,11 +27,32 @@ function get_user_stats($user_id) {
 
 function get_user_activity($user_id, $limit = null, $offset = null) {
     global $db;
-    $query = "SELECT p.post_content, p.creation_date, t.thread_name, t.creation_date AS thread_date
+    $query = "(SELECT p.post_content AS activity_content, p.creation_date AS activity_date, 
+                t.thread_name AS thread_name, t.creation_date AS thread_date,
+                t.thread_id AS thread_id, 'post' AS activity_type
                 FROM posts p
                 JOIN threads t ON p.thread_id = t.thread_id
-                WHERE p.user_id = :user_id
-                ORDER BY p.creation_date DESC";
+                WHERE p.user_id = :user_id)
+                
+                UNION ALL
+                
+                (SELECT '' AS activity_content, lp.creation_date AS activity_date,
+                t.thread_name AS thread_name, t.creation_date AS thread_date,
+                t.thread_id AS thread_id, 'like' AS activity_type
+                FROM post_likes l
+                JOIN posts lp ON l.post_id = lp.post_id
+                JOIN threads t ON lp.thread_id = t.thread_id
+                WHERE l.user_id = :user_id)
+                
+                UNION ALL
+                
+                (SELECT '' AS activity_content, t.creation_date AS activity_date,
+                t.thread_name AS thread_name, t.creation_date AS thread_date,
+                t.thread_id AS thread_id, 'create' AS activity_type
+                FROM threads t
+                WHERE t.user_id = :user_id)
+                
+                ORDER BY activity_date DESC";
 
     if ($limit !== null) {
         $query .= " LIMIT :limit";

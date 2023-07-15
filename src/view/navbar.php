@@ -1,11 +1,11 @@
 <!-- views/navbar.php -->
-<nav class="px-0 md:px-4 navbar navbar-expand-lg bg-body-tertiary fixed-top">
+<nav class="px-0 md:px-4 navbar drop-shadow navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="container-fluid">
 
         <!-- Logo -->
         <a class="navbar-brand" href="/<?php echo $base_url; ?>/">
-            <img src="assets/images/" alt="Logo" width="30px" height="30px" class="d-inline-block align-text-center">
-            <span class="px-1 brand-text d-none d-md-inline">Forum Name</span>
+            <img src="/<?php echo $base_url; ?>/assets/images/logo.png" alt="Logo" width="300px" height="70px" class="d-none d-md-inline-block align-text-center">
+            <img src="/<?php echo $base_url; ?>/assets/images/logo_sm.png" alt="Logo Small" width="50px" height="50px" class="d-inline-block d-md-none align-text-center">
         </a>
 
         <!-- Search -->
@@ -26,12 +26,14 @@
             <?php if (!$user) { ?> <!--  if not logged in -->
                 <li class="nav-item">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <i class="bi bi-key"><span class="d-none d-md-inline">Log In</span></i>
+                        <i class="bi bi-key"></i>
+                        <span class="d-none d-md-inline text-xl">Log In</span>
                     </button>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#registerModal">
-                        <i class="bi bi-clipboard"><span class="d-none d-md-inline">Register</span></i>
+                        <i class="bi bi-clipboard"></i>
+                        <span class="d-none d-md-inline text-xl">Register</span>
                     </button>
                 </li>
             <?php } else {  ?>
@@ -39,7 +41,7 @@
                     <div class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php echo generate_avatar($user, 35) ?>
                     </div>
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="/<?php echo $base_url; ?>/user/<?php echo clean_topic_name_for_url($user['username']); ?>.<?php echo $user['user_id']; ?>">
                         View Profile</a></li>
                         <hr>

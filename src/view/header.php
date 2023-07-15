@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/<?php echo $base_url; ?>/assets/favicon.ico">
     <title><?php echo $title ;?> <?php echo '| Forum'; ?></title>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 

@@ -5,7 +5,7 @@ $postCount = get_post_count_by_topic($topic['topic_id']); // Use the post count 
 ?>
 
 <a href="/<?php echo $base_url; ?>/topics/<?php echo clean_topic_name_for_url($topic['topic_name']); ?>.<?php echo $topic['topic_id']; ?>?page=1">
-<div class="w-100 border-b border-black">
+<div class="w-100 border-b border-l border-r">
     <div class="d-flex align-items-center  px-3">
         <!-- Icon -->
         <div class="pr-4">
