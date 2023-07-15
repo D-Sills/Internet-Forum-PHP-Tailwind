@@ -44,4 +44,18 @@ function get_users() {
     // Fetch and return the categories data
     return $statement->fetchAll();
 }
+
+function get_user_by_id($user_id) {
+    global $db;
+
+    $query = "SELECT * FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement->execute();
+
+    // Fetch and return the user object
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
 ?>
+
+

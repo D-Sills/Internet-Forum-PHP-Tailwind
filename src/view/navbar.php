@@ -37,7 +37,7 @@
             <?php } else {  ?>
                 <li class="nav-item dropdown">
                     <div class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="avatar" src="path/to/user_avatar.jpg" alt="<?php echo $user['username']; ?>" width="50" height="50">
+                    <?php echo generate_avatar($user, 35) ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="/<?php echo $base_url; ?>/user/<?php echo clean_topic_name_for_url($user['username']); ?>.<?php echo $user['user_id']; ?>">
@@ -59,7 +59,7 @@
 <script>
 function logout() {
     $.ajax({
-        url: '/WebProgramming-FinalProject/src/model/logout.php',
+        url: '/WebProgramming-FinalProject/src/model/ajax/logout.php',
         method: 'POST',
         success: function(response) {
             location.reload();
@@ -69,4 +69,41 @@ function logout() {
         }
     });
 }
+
+// Function to perform the search using AJAX
+function performSearch() {
+  // Get the search input value
+  var searchInput = document.querySelector('.form-control').value;
+
+  // Perform AJAX request
+  $.ajax({
+    url: '/WebProgramming-FinalProject/src/model/ajax/search.php',
+    type: 'GET',
+    data: { search: searchInput },
+    dataType: 'json',
+    success: function(response) {
+      // Handle the success response
+      console.log('Search results:', response);
+      window.location.href = '/WebProgramming-FinalProject/search/' + searchInput;
+    },
+    error: function(xhr, status, error) {
+      console.log('Failed to perform search:', error);
+    }
+  });
+}
+
+// Event listener for the search button
+document.querySelector('.btn').addEventListener('click', function(event) {
+  event.preventDefault();
+  performSearch();
+});
+
+// Event listener for pressing Enter in the search input field
+document.querySelector('.form-control').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    performSearch();
+  }
+});
+
 </script>

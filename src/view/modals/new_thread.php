@@ -28,7 +28,7 @@ var quill = new Quill('#threadEditor', {
     toolbar: [
       [{ header: [1, 2, false] }],
       ['bold', 'italic', 'underline'],
-      ['image', 'code-block']
+      ['code-block']
     ]
   },
   placeholder: 'Compose an epic...',
@@ -56,7 +56,7 @@ $('#newThreadForm').on('submit', function(event) {
       console.log('Thread created successfully:', response);
       // Close the modal and perform any desired actions
       var threadId = response.threadId; // Assuming the response includes the newly created thread ID
-      var threadUrl = '/WebProgramming-FinalProject/thread/' + threadId; // Replace with the actual URL structure for your thread pages
+      var threadUrl = '/WebProgramming-FinalProject/threads/' + threadId + '?page=1'; // Replace with the actual URL structure for your thread pages
       window.location.href = threadUrl;
     },
     error: function(xhr, status, error) {

@@ -14,7 +14,7 @@ $topic_id = $_POST['topicId'];
 // Assuming you have a database connection established ($db)
 
 // Insert the new thread into the database
-$query = "INSERT INTO threads (thread_subject, thread_date, user_id, topic_id) VALUES (:title, NOW(), :user_id, :topic_id)";
+$query = "INSERT INTO threads (thread_name, creation_date, user_id, topic_id) VALUES (:title, NOW(), :user_id, :topic_id)";
 $statement = $db->prepare($query);
 $statement->bindParam(':title', $title);
 $statement->bindParam(':user_id', $_SESSION['user']['user_id']);
@@ -25,7 +25,7 @@ if ($statement->execute()) {
   $threadId = $db->lastInsertId();
   
   // Insert the post into the database
-  $postQuery = "INSERT INTO posts (post_content, post_date, user_id, thread_id) VALUES (:content, NOW(), :user_id, :thread_id)";
+  $postQuery = "INSERT INTO posts (post_content, creation_date, user_id, thread_id) VALUES (:content, NOW(), :user_id, :thread_id)";
   $postStatement = $db->prepare($postQuery);
   $postStatement->bindParam(':content', $content);
   $postStatement->bindParam(':user_id', $_SESSION['user']['user_id']);

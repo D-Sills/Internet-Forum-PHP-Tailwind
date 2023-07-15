@@ -1,6 +1,7 @@
 <!-- controllers/posts_controller.php -->
 <?php
 require_once __DIR__ . '/../model/posts_db.php';
+require_once __DIR__ . '/../model/users_db.php';
 require_once __DIR__ .'/../model/sidebar_db.php';
 
 $postsPerPage = 10;
@@ -16,7 +17,7 @@ $forum_stats = get_forum_stats();
 
 $page = 'Posts';
 $thread = get_thread($threadId);
-$title = $thread['thread_subject'];
+$title = $thread['thread_name'];
 
 include __DIR__ . '/../view/header.php';
 include __DIR__ . '/../view/navbar.php';

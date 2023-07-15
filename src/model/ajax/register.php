@@ -37,8 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statement->bindParam(':password', $hashedPassword);
     $statement->execute();
 
-    // Set the user as authenticated in the session (optional)
-    $_SESSION['user'] = ['username' => $username, 'email' => $email];
+    // Fetch the newly created user from the database
+    $query = "SELECT * FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':user_id', $db->lastInsertId());
+    $statement->execute();
+    $newUser = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // Set the user as authenticated in the session
+    $_SESSION['user'] = $newUser;
 
     // Return a success response
     $response = ['success' => true];
@@ -52,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 header('Content-Type: application/json');
 echo json_encode($response);
 exit();
+
 ?>
 
 

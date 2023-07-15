@@ -16,7 +16,7 @@ $forum_stats = get_forum_stats();
 
 $page = 'Threads';
 $topic = get_topic($topicId);
-$title = $topic['topic_subject'];
+$title = $topic['topic_name'];
 
 include __DIR__ . '/../view/header.php';
 include __DIR__ . '/../view/navbar.php';

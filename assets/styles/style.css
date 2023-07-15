@@ -69,3 +69,29 @@ body {
     border-radius: 15px 15px 0 0;
     filter: drop-shadow(1px 1px 5px #00000032);
 }
+
+.avatar {
+  border-radius: 50%;
+
+}
+
+.user-section {
+  border-right: 2px solid rgb(220, 216, 216);
+  justify-content: center;
+  min-width: 135px;
+  max-width: 135px;
+  background-color: #ebe9e9;
+}
+
+.drop-shadow {
+  filter: drop-shadow(1px 1px 2px #00000032);
+  background-color: white;
+}
+
+#replyEditor {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}

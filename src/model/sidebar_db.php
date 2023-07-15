@@ -2,22 +2,21 @@
 require_once('database.php');
 
 function get_latest_posts($limit = 5) {
-    global $db; // Make sure to access the $db PDO object declared in the global scope
+    global $db;
 
-    $query = "SELECT p.post_content, p.post_date, u.username, t.topic_subject, c.category_name
-                FROM posts p
-                INNER JOIN users u ON p.user_id = u.user_id
-                INNER JOIN threads thr ON p.thread_id = thr.thread_id
-                INNER JOIN topics t ON thr.topic_id = t.topic_id
-                INNER JOIN categories c ON t.category_id = c.category_id
-                ORDER BY p.post_date DESC
-                LIMIT :limit";
+    $query = "SELECT p.post_content, p.creation_date, u.*, t.thread_name, t.thread_id, tp.topic_name, c.category_name
+              FROM posts p
+              INNER JOIN users u ON p.user_id = u.user_id
+              INNER JOIN threads t ON p.thread_id = t.thread_id
+              INNER JOIN topics tp ON t.topic_id = tp.topic_id
+              INNER JOIN categories c ON tp.category_id = c.category_id
+              ORDER BY p.creation_date DESC
+              LIMIT :limit";
 
     $statement = $db->prepare($query);
     $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
     $statement->execute();
 
-    // Fetch and return the latest posts data
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 

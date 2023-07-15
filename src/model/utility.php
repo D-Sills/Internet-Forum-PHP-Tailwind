@@ -42,13 +42,44 @@ function time_ago($timestamp) {
     }
 }
 
+function convert_timestamp($timestamp) {
+    $date = new DateTime($timestamp);
+    return $date->format('M j, Y');
+}
 
-function generate_avatar($username, $userId, $image_size = 50) {
+function generateRandomColor($username) {
+    // Convert the username to a unique numerical value
+    $numericValue = crc32($username);
+    
+    // Generate RGB values based on the numerical value
+    $red = ($numericValue & 0xFF0000) >> 16;
+    $green = ($numericValue & 0x00FF00) >> 8;
+    $blue = $numericValue & 0x0000FF;
+    
+    // Format the RGB values as a hexadecimal color code
+    $color = sprintf("#%02x%02x%02x", $red, $green, $blue);
+    
+    return $color;
+}
+
+function generate_avatar($user, $image_size = '50px') {
     $avatar_url = 'path/to/default_avatar.jpg';
     $base_url = 'WebProgramming-FinalProject';
     
-    $avatar_html = '<a href="/'.$base_url.'/user/'.clean_topic_name_for_url($username).$userId.'">';
-    $avatar_html .= '<img class="avatar" src="'.$avatar_url.'" alt="'.$username.'" width="'.$image_size.'" height="'.$image_size.'">';
+    $avatar_html = '<a href="/'.$base_url.'/user/'.clean_topic_name_for_url($user['username']).'.'.$user['user_id'].'">';
+    if ($user['avatar'] == 0) {
+        // Generate random background color
+        $backgroundColor = generateRandomColor($user['username']);
+        
+        // Get the first letter of the username
+        $firstLetter = strtoupper(substr($user['username'], 0, 1));
+        
+        // Set the avatar HTML with the background color and first letter
+        $avatar_html .= '<div class="avatar" style="width: ' . $image_size . 'px; height: ' . $image_size . 'px; background-color: ' . $backgroundColor . '; display: flex; justify-content: center; align-items: center; color: #fff; font-weight: bold; font-size: ' . ($image_size * 0.5) . 'px;">' . $firstLetter . '</div>';
+    } else {
+        $avatar_html .= '<img class="avatar" src="'.$avatar_url.'" alt="'.$user['username'].'" width="'.$image_size.'" height="'.$image_size.'">';
+    }
+    
     $avatar_html .= '</a>';
 
     return $avatar_html;
@@ -59,7 +90,10 @@ function searchForum($searchQuery) {
 
     // Perform your database query here to search for matching posts
     // Modify the SQL query according to your database schema and search requirements
-    $query = "SELECT * FROM posts WHERE post_content LIKE :search_query";
+    $query = "SELECT p.*, t.thread_id 
+                FROM posts p 
+                INNER JOIN threads t ON p.thread_id = t.thread_id 
+                WHERE p.post_content LIKE :search_query";
 
     $statement = $db->prepare($query);
     $statement->bindValue(':search_query', "%{$searchQuery}%");
@@ -69,5 +103,6 @@ function searchForum($searchQuery) {
 
     return $results;
 }
+
 
 ?>

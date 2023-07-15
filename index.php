@@ -32,6 +32,11 @@ switch (true) {
         $userId = $matches[2];
         include __DIR__ . '/src/controller/user_page_controller.php';
         break;
+        
+    case preg_match('#^/'.$base_url.'/search/([^/.]+)(?:\?.*)?$#', $requestUrl, $matches):
+        $searchQuery = $matches[1];
+        include __DIR__ . '/src/controller/search_controller.php';
+        break;
 
     default:
         include __DIR__ . '/src/controller/home_controller.php';
