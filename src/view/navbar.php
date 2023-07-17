@@ -4,8 +4,8 @@
 
         <!-- Logo -->
         <a class="navbar-brand" href="/<?php echo $base_url; ?>/">
-            <img src="/<?php echo $base_url; ?>/assets/images/logo.png" alt="Logo" width="300px" height="70px" class="d-none d-md-inline-block align-text-center">
-            <img src="/<?php echo $base_url; ?>/assets/images/logo_sm.png" alt="Logo Small" width="50px" height="50px" class="d-inline-block d-md-none align-text-center">
+            <img src="/<?php echo $base_url; ?>/assets/images/logo.png" alt="Logo" width="300px" height="70px" class="d-none d-lg-inline-block align-text-center">
+            <img src="/<?php echo $base_url; ?>/assets/images/logo_sm.png" alt="Logo Small" width="50px" height="50px" class="d-inline-block d-lg-none align-text-center">
         </a>
 
         <!-- Search -->
@@ -42,7 +42,7 @@
                     <?php echo generate_avatar($user, 35) ?>
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/<?php echo $base_url; ?>/user/<?php echo clean_topic_name_for_url($user['username']); ?>.<?php echo $user['user_id']; ?>">
+                        <li><a class="dropdown-item" href="/<?php echo $base_url; ?>/?route=user&id=<?php echo $user['user_id']; ?>">
                         View Profile</a></li>
                         <hr>
                         <li><button onclick="logout()" class="dropdown-item">Log out</a></li>
@@ -61,7 +61,7 @@
 <script>
 function logout() {
     $.ajax({
-        url: '/WebProgramming-FinalProject/src/model/ajax/logout.php',
+        url: '/finalteam9/src/model/ajax/logout.php',
         method: 'POST',
         success: function(response) {
             location.reload();
@@ -79,14 +79,14 @@ function performSearch() {
 
   // Perform AJAX request
   $.ajax({
-    url: '/WebProgramming-FinalProject/src/model/ajax/search.php',
+    url: '/finalteam9/src/model/ajax/search.php',
     type: 'GET',
     data: { search: searchInput },
     dataType: 'json',
     success: function(response) {
       // Handle the success response
       console.log('Search results:', response);
-      window.location.href = '/WebProgramming-FinalProject/search/' + searchInput;
+      window.location.href = '/finalteam9/?route=search&query=' + searchInput;
     },
     error: function(xhr, status, error) {
       console.log('Failed to perform search:', error);

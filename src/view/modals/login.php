@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     // Send AJAX request
     $.ajax({
-      url: '/WebProgramming-FinalProject/src/model/ajax/login.php', // Backend login URL
+      url: '/finalteam9/src/model/ajax/login.php', // Backend login URL
       type: 'POST',
       data: formData,
       dataType: 'json', 

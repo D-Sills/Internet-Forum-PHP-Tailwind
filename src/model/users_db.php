@@ -1,15 +1,24 @@
 <?php
 require_once('database.php');
-
 function get_user_stats($user_id) {
     global $db;
 
+    // Get total likes given
+    $query_likes_given = "SELECT COUNT(*) AS total_likes_given FROM post_likes WHERE user_id = :user_id";
+    $statement_likes_given = $db->prepare($query_likes_given);
+    $statement_likes_given->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement_likes_given->execute();
+    $total_likes_given = $statement_likes_given->fetchColumn();
+
     // Get total likes received
-    $query_likes = "SELECT COUNT(*) AS total_likes FROM post_likes WHERE user_id = :user_id";
-    $statement_likes = $db->prepare($query_likes);
-    $statement_likes->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $statement_likes->execute();
-    $total_likes = $statement_likes->fetchColumn();
+    $query_likes_received = "SELECT COUNT(*) AS total_likes_received
+                            FROM post_likes pl
+                            JOIN posts p ON pl.post_id = p.post_id
+                            WHERE p.user_id = :user_id";
+    $statement_likes_received = $db->prepare($query_likes_received);
+    $statement_likes_received->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement_likes_received->execute();
+    $total_likes_received = $statement_likes_received->fetchColumn();
 
     // Get total posts made
     $query_posts = "SELECT COUNT(*) AS total_posts FROM posts WHERE user_id = :user_id";
@@ -20,10 +29,12 @@ function get_user_stats($user_id) {
 
     // Return the user stats as an associative array
     return array(
-        'total_likes' => $total_likes,
+        'total_likes_given' => $total_likes_given,
+        'total_likes' => $total_likes_received,
         'total_posts' => $total_posts
     );
 }
+
 
 function get_user_activity($user_id, $limit = null, $offset = null) {
     global $db;

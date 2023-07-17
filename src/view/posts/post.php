@@ -49,7 +49,15 @@ $stats = get_user_stats($post['user_id']);
             <!-- Header -->
             <div class="pb-2 flex justify-between">
                 <span class="text-xs"><?php echo convert_timestamp($post['creation_date']) ?></span>
-                <span class="text-xs"><button id="likeButton"><i class="bi bi-hand-thumbs-up pr-2"></i></button>#<?php echo ($i + 1); ?></span>
+                
+                <span class="text-xs">
+                <?php if ($user) { ?>
+                <button id="likeButton_<?php echo $post['post_id']; ?>" data-post-id="<?php echo $post['post_id'];?>"><i class="bi bi-hand-thumbs-up pr-2"></i>
+                </button>
+                <button id="deleteButton_<?php echo $post['post_id']; ?>" data-post-id="<?php echo $post['post_id'];?>"><i class="bi bi-x-circle pr-2"></i>
+                </button>
+                <?php } ?>
+                #<?php echo $postIndex; ?></span>
             </div>
         
             <!-- Body -->
@@ -87,29 +95,74 @@ $stats = get_user_stats($post['user_id']);
 </div>
 
 <script>
-$('#likeButton').on('click', function() {
-  event.preventDefault(); 
-  
-  // Perform any necessary checks or validation on the reply content
-  
-  // Send AJAX request to post the reply
-  $.ajax({
-    url: '/WebProgramming-FinalProject/src/model/ajax/like_post.php', // Backend URL to handle posting the reply
-    type: 'POST',
-    data: replyData,
-    dataType: 'json',
-    success: function(response) {
-      // Handle success response
-      console.log('Post successfully liked:', response);
-      // Clear the reply editor
-      location.reload();
-      // Perform any desired actions
-    },
-    error: function(xhr, status, error) {
-      // Handle error response
-      console.log('Failed to post reply:', error);
+
+
+$(document).ready(function() {
+    // Bind the click event to each like button using a unique identifier
+    $('#likeButton_<?php echo $post['post_id']; ?>').on('click', function() {
+        event.preventDefault(); 
+
+        var postId = $(this).data('post-id');
+
+        // Send AJAX request to like the post
+        $.ajax({
+            url: '/finalteam9/src/model/ajax/like_post.php', // Backend URL to handle liking the post
+            type: 'POST',
+            data: { postId: postId },
+            dataType: 'json',
+            success: function(response) {
+                // Handle success response
+                console.log('Post successfully liked:', response);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.log('Failed to like post:', error);
+            }
+        });
+    });
+});
+
+// Bind the click event to each delete button using a unique identifier
+$('#deleteButton_<?php echo $post['post_id']; ?>').on('click', function() {
+    event.preventDefault();
+
+    var postId = $(this).data('post-id');
+
+    // Check if the user is an admin or the owner of the post
+    var isAdmin = <?php echo $user['privilege'] == 'admin' ? 'true' : 'false'; ?>;
+    var isOwner = <?php echo $user && $user['user_id'] === $post['user_id'] ? 'true' : 'false'; ?>;
+
+    // Confirm the deletion
+    var confirmationMessage = isAdmin ? 'Are you sure you want to delete this post?' : 'Are you sure you want to delete your post?';
+    if (!confirm(confirmationMessage)) {
+        return;
     }
-  });
+
+    // Send AJAX request to delete the post
+    $.ajax({
+        url: '/finalteam9/src/model/ajax/delete_post.php', // Backend URL to handle post deletion
+        type: 'POST',
+        data: { postId: postId },
+        dataType: 'json',
+        success: function(response) {
+            // Handle success response
+            console.log('Post deleted successfully:', response);
+            location.reload();
+            // Reload or update the post list
+            // ...
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.log('Failed to delete post:', error);
+        }
+    });
 });
 </script>
+
+
+
+
+
+
 

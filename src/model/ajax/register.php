@@ -1,5 +1,6 @@
 <?php
 // Start the session
+// Start the session
 session_start();
 require_once('../database.php');
 global $db;
@@ -17,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Check if the username or email already exists in the database
   $query = "SELECT * FROM users WHERE username = :username OR email = :email";
   $statement = $db->prepare($query);
-  $statement->bindParam(':username', $username);
-  $statement->bindParam(':email', $email);
+  $statement->bindValue(':username', $username);
+  $statement->bindValue(':email', $email);
   $statement->execute();
   $existingUser = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -30,19 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the new user into the database
-    $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':username', $username);
-    $statement->bindParam(':email', $email);
-    $statement->bindParam(':password', $hashedPassword);
-    $statement->execute();
+    $insertQuery = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+    $insertStatement = $db->prepare($insertQuery);
+    $insertStatement->bindValue(':username', $username);
+    $insertStatement->bindValue(':email', $email);
+    $insertStatement->bindValue(':password', $hashedPassword);
+    $insertStatement->execute();
 
     // Fetch the newly created user from the database
-    $query = "SELECT * FROM users WHERE user_id = :user_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':user_id', $db->lastInsertId());
-    $statement->execute();
-    $newUser = $statement->fetch(PDO::FETCH_ASSOC);
+    $selectQuery = "SELECT * FROM users WHERE user_id = :user_id";
+    $selectStatement = $db->prepare($selectQuery);
+    $selectStatement->bindValue(':user_id', $db->lastInsertId());
+    $selectStatement->execute();
+    $newUser = $selectStatement->fetch(PDO::FETCH_ASSOC);
 
     // Set the user as authenticated in the session
     $_SESSION['user'] = $newUser;
@@ -61,5 +62,3 @@ echo json_encode($response);
 exit();
 
 ?>
-
-

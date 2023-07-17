@@ -1,46 +1,43 @@
 <?php
+session_start();
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$base_url = 'WebProgramming-FinalProject';
+$base_url = 'finalteam9';
 
 require_once __DIR__ . '/src/model/utility.php';
 require_once __DIR__ . '/src/model/global.php';
-
-session_start();
 
 if (isset($_SESSION['user']))
     $user = $_SESSION['user'];
 else $user = null;
 
-$requestUrl = $_SERVER['REQUEST_URI'];
+$requestRoute = $_GET['route'] ?? '';
+$requestId = $_GET['id'] ?? '';
 
-switch (true) {
-    case preg_match('#^/'.$base_url.'/topics/([^/.]+)\.(\d+)(?:\?.*)?$#', $requestUrl, $matches):
-        $topicId = $matches[2];
-        $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+switch ($requestRoute) {
+    case 'topics':
+        $topicId = $requestId;
+        $pageNumber = $_GET['page'] ?? 1;
         include __DIR__ . '/src/controller/threads_controller.php';
         break;
-
-    case preg_match('#^/'.$base_url.'/threads/([^/.]+)\.(\d+)(?:\?.*)?$#', $requestUrl, $matches):
-        $threadId = $matches[2];
-        $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    case 'threads':
+        $threadId = $requestId;
+        $pageNumber = $_GET['page'] ?? 1;
         include __DIR__ . '/src/controller/posts_controller.php';
         break;
-        
-    case preg_match('#^/'.$base_url.'/user/([^/.]+)\.(\d+)(?:\?.*)?$#', $requestUrl, $matches):
-        $userId = $matches[2];
+    case 'user':
+        $userId = $requestId;
         include __DIR__ . '/src/controller/user_page_controller.php';
         break;
-        
-    case preg_match('#^/'.$base_url.'/search/([^/.]+)(?:\?.*)?$#', $requestUrl, $matches):
-        $searchQuery = $matches[1];
+    case 'search':
+        $searchQuery = $_GET['query'] ?? '';
         include __DIR__ . '/src/controller/search_controller.php';
         break;
-
     default:
         include __DIR__ . '/src/controller/home_controller.php';
         break;
 }
 
-?>
+

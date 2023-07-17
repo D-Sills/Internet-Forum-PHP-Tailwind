@@ -22,7 +22,7 @@ function get_posts_by_thread_id($thread_id, $limit = null, $offset = null) {
                 FROM posts p
                 INNER JOIN users u ON p.user_id = u.user_id
                 WHERE p.thread_id = :thread_id
-                ORDER BY p.creation_date DESC";
+                ORDER BY p.creation_date ASC";
 
     if ($limit !== null) {
         $query .= " LIMIT :limit";

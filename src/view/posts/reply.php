@@ -13,7 +13,7 @@
         <div class="w-100 p-2">
             <div id="replyEditor"></div>
             <div class="flex justify-end">
-                <button class="mt-2 py-2 px-4 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600" id="postReplyButton">Post Reply</button>
+                <button class="btn btn-primary mt-3" id="postReplyButton">Post Reply</button>
             </div>
         </div>
 
@@ -41,17 +41,24 @@ var replyEditor = new Quill('#replyEditor', {
 $('#postReplyButton').on('click', function() {
   event.preventDefault(); 
   
-    // Gather form data
+  // Gather form data
+  var replyContent = replyEditor.root.innerHTML;
+  var threadId = <?php echo json_encode($threadId); ?>; // Pass the topic ID from PHP to JavaScript
+  
+  // Check if the reply content is empty
+  if (replyContent.trim() === '') {
+    alert('Please enter a reply.');
+    return;
+  }
+  
   var replyData = {
-    content: replyEditor.root.innerHTML,
-    threadId: <?php echo $threadId; ?> // Pass the topic ID from PHP to JavaScript
+    content: replyContent,
+    threadId: threadId
   };
-  
-  // Perform any necessary checks or validation on the reply content
-  
+
   // Send AJAX request to post the reply
   $.ajax({
-    url: '/WebProgramming-FinalProject/src/model/ajax/post_reply.php', // Backend URL to handle posting the reply
+    url: '/finalteam9/src/model/ajax/post_reply.php', // Backend URL to handle posting the reply
     type: 'POST',
     data: replyData,
     dataType: 'json',
@@ -69,4 +76,5 @@ $('#postReplyButton').on('click', function() {
   });
 });
 </script>
+
 

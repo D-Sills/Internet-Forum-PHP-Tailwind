@@ -1,5 +1,5 @@
 <!-- views/post_List.php -->
-<div>
+<div class="mb-3">
     <h2 class="text-xl"><?php echo $title; ?></h2>
     <h4 class="my-1 text-sm"><i class="bi bi-person pr-1"></i><?php echo $thread['thread_creator_username'] ?> &#183; <i class="bi bi-clock pr-1"></i><?php echo convert_timestamp($thread['creation_date']) ?></h4>
     
@@ -7,22 +7,25 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/<?php echo $base_url; ?>/"><i class="bi bi-house-door"></i></a></li>
             <li class="breadcrumb-item" aria-current="page"> <?php echo $thread['category_name']; ?></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="/<?php echo $base_url; ?>/topics/<?php echo clean_topic_name_for_url($thread['topic_name']); ?>.<?php echo $thread['topic_id']; ?>?page=1"><?php echo $thread['topic_name']; ?></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $thread['topic_id']; ?>?page=1"><?php echo $thread['topic_name']; ?></a></li>
         </ol>
     </nav>
     
     <?php include 'pagination.php'; ?>
 </div>
 
-<div class = "pt-3">
 <?php 
     $count = count($posts);
-    for ($i = $count - 1; $i >= 0; $i--) {
+    $startIndex = ($pageNumber - 1) * $postsPerPage; // Calculate the start index based on the page number and posts per page
+
+    for ($i = 0; $i < $count; $i++) {
         $post = $posts[$i];
+        $postIndex = $startIndex + $i + 1; // Calculate the post index based on the start index and loop index
         include 'post.php';
     }
-?>
-</div>
+    ?>
+
+
 
 <?php include 'pagination.php'; ?>
 <?php include 'reply.php'; ?>

@@ -8,7 +8,7 @@
         
         <!-- Topic Info -->
         <div class="py-2">
-            <a href="/<?php echo $base_url; ?>/threads/<?php echo clean_topic_name_for_url($thread['thread_name']); ?>.<?php echo $thread['thread_id']; ?>?page=1">
+            <a href="/<?php echo $base_url; ?>//?route=threads&id=<?php echo $thread['thread_id']; ?>?page=1">
                 <h4><?php echo $thread['thread_name']; ?></h4>
                 <div class="pt-1">
                     <span><?php echo $thread['creator_username']; ?> &#183; <?php echo convert_timestamp($thread['creation_date']) ?></span>

@@ -64,9 +64,9 @@ function generateRandomColor($username) {
 
 function generate_avatar($user, $image_size = '50px') {
     $avatar_url = 'path/to/default_avatar.jpg';
-    $base_url = 'WebProgramming-FinalProject';
+    $base_url = 'finalteam9';
     
-    $avatar_html = '<a href="/'.$base_url.'/user/'.clean_topic_name_for_url($user['username']).'.'.$user['user_id'].'">';
+    $avatar_html = '<a href="/'.$base_url.'/?route=user&id='.$user['user_id'].'">';
     if ($user['avatar'] == 0) {
         // Generate random background color
         $backgroundColor = generateRandomColor($user['username']);

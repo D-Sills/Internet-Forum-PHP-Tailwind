@@ -4,7 +4,7 @@ $threadCount = get_thread_count_by_topic($topic['topic_id']); // Use the thread 
 $postCount = get_post_count_by_topic($topic['topic_id']); // Use the post count for the current topic or set it to 0 if not found
 ?>
 
-<a href="/<?php echo $base_url; ?>/topics/<?php echo clean_topic_name_for_url($topic['topic_name']); ?>.<?php echo $topic['topic_id']; ?>?page=1">
+<a href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topic['topic_id']; ?>&page=1">
 <div class="w-100 border-b border-l border-r">
     <div class="d-flex align-items-center  px-3">
         <!-- Icon -->

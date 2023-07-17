@@ -1,9 +1,10 @@
 <!-- views/body.php -->
 <div class="mt-28 mb-2 mx-2">
-<div class="container p-0 content">
+<div class="container">
+<div class=" p-0 content">
     <!-- Banner -->
     <div id="banner">
-        <img src="path/to/your/banner-image.jpg" class="w-100 img-fluid" alt="Banner Image">
+        <img src="/<?php echo $base_url; ?>/assets/images/banner.png" class="w-100 img-fluid" alt="Banner Image">
         <h1>Welcome!</h1>
     </div>
     
@@ -45,18 +46,21 @@
         </div>
         
         <div class="text-2xl">
-            <a target="_blank" href="https://twitter.com/elvin1803"><i class="bi bi-envelope"></i></a>
-            <a target="_blank" href="https://twitter.com/elvin1803"><i class="bi bi-facebook"></i></a>
-            <a target="_blank" href="https://twitter.com/Darrizard"><i class="bi bi-twitter"></i></a>
+            <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-envelope"></i></a>
+            <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-facebook"></i></a>
+            <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-twitter"></i></a>
             <a href="#"><i class="bi bi-arrow-up font-extrabold"></i></a>
         </div>
     </footer>
     
 </div>
-</div>
 
 <!-- Copyright stuff -->
-<span class="py-2 mx-2">Website by us</span>
+<p class=" my-2 mb-2 mx-2">Website by group 9 | 2023</p>
+</div>
+</div>
+
+
 
 <?php switch ($page) {
     case 'Threads':

@@ -5,7 +5,7 @@
             <!-- First Page Link -->
             <?php if ($pageNumber > 1): ?>
                 <li class="page-item">
-                    <a class="page-link" href="<?php echo clean_topic_name_for_url($title); ?>.<?php echo $topicId; ?>?page=1" aria-label="First">
+                    <a class="page-link" href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topicId; ?>&page=1" aria-label="First">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">First</span>
                     </a>
@@ -20,12 +20,13 @@
             <?php if ($totalPages <= 5) {
                 // Display all page links if the total number of pages is 5 or fewer
                 for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <li class="page-item <?php echo $i === $pageNumber ? 'active' : ''; ?>">
-                        <a class="page-link" href="<?php echo clean_topic_name_for_url($title); ?>.<?php echo $topicId; ?>?page=<?php echo $i; ?>">
+                    <li class="page-item <?php echo $i === (int)$pageNumber ? 'active' : ''; ?>">
+                        <a class="page-link" href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topicId; ?>&page=<?php echo $i; ?>">
                             <?php echo $i; ?>
                         </a>
                     </li>
                 <?php endfor;
+                
             } else {
                 // Display the current page and nearby page links with "..."
                 $startPage = max($pageNumber - 1, 1);
@@ -38,8 +39,8 @@
                 <?php endif;
 
                 for ($i = $startPage; $i <= $endPage; $i++): ?>
-                    <li class="page-item <?php echo $i === $pageNumber ? 'active' : ''; ?>">
-                        <a class="page-link" href="<?php echo clean_topic_name_for_url($title); ?>.<?php echo $topicId; ?>?page=<?php echo $i; ?>">
+                    <li class="page-item <?php echo $i === (int)$pageNumber ? 'active' : ''; ?>">
+                        <a class="page-link" href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topicId; ?>&page=<?php echo $i; ?>">
                             <?php echo $i; ?>
                         </a>
                     </li>
@@ -52,7 +53,7 @@
                         </li>
                     <?php endif; ?>
                     <li class="page-item">
-                        <a class="page-link" href="<?php echo clean_topic_name_for_url($title); ?>.<?php echo $topicId; ?>?page=<?php echo $totalPages; ?>" aria-label="Last">
+                        <a class="page-link" href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topicId; ?>&page=<?php echo $totalPages; ?>" aria-label="Last">
                             <?php echo $totalPages; ?>
                         </a>
                     </li>
@@ -62,7 +63,7 @@
             <!-- Next Page Link -->
             <?php if ($pageNumber < $totalPages): ?>
                 <li class="page-item">
-                    <a class="page-link" href="<?php echo clean_topic_name_for_url($title); ?>.<?php echo $topicId; ?>?page=<?php echo $pageNumber + 1; ?>" aria-label="Next">
+                    <a class="page-link" href="/<?php echo $base_url; ?>/?route=topics&id=<?php echo $topicId; ?>&page=<?php echo $pageNumber + 1; ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -75,3 +76,5 @@
         </ul>
     </nav>
 <?php endif; ?>
+
+

@@ -1,10 +1,4 @@
--- Drop the database if it exists
-DROP DATABASE IF EXISTS discussion_forum;
--- Create the database
-CREATE DATABASE discussion_forum;
-
--- Use the database
-USE discussion_forum;
+USE finalteam9;
 
 -- Create the table for categories
 CREATE TABLE IF NOT EXISTS categories (

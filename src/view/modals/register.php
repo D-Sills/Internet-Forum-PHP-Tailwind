@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="registerModalLabel">Log In</h1>
+        <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
     // Send AJAX request
     $.ajax({
-      url: '/WebProgramming-FinalProject/src/model/ajax/register.php', // Backend registration URL
+      url: '/finalteam9/src/model/ajax/register.php', // Backend registration URL
       method: 'POST',
       data: formData,
       dataType: 'json',

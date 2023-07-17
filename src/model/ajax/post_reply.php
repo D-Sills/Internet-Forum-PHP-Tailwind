@@ -6,7 +6,8 @@ global $db;
 
 // Get the reply content and associated thread ID from the request data
 $content = $_POST['content'];
-$thread_id = $_POST['threadId'];
+$thread_id = intval($_POST['threadId']);
+
 
 // Assuming you have a database connection established ($db)
 // Insert the new reply into the database

@@ -13,7 +13,7 @@ $user = get_user_by_id($result['user_id']);
         
         <!-- Topic Info -->
         <div class="py-2">
-            <a href="/<?php echo $base_url; ?>/threads/<?php echo clean_topic_name_for_url($thread['thread_name']); ?>.<?php echo $thread['thread_id']; ?>?page=1">
+            <a href="/<?php echo $base_url; ?>/?route=threads&id=<?php echo $thread['thread_id']; ?>?page=1">
                 <h4 class="text-md"><?php echo $thread['thread_name']; ?></h4>
                 <p class="text-sm"><?php echo $result['post_content']; ?></p>
                 <div >

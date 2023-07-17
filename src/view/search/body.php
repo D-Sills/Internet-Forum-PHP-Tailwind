@@ -1,6 +1,7 @@
 <!-- views/body.php -->
 <div class="mt-28 mb-2 mx-2">
-    <div class="container p-0 content">
+<div class="container">
+    <div class="p-0 content">
         <!-- Top Banner -->
         <div class="p-3">
         <div>
@@ -36,23 +37,22 @@
         <footer class="d-flex justify-content-between align-items-center p-2">
             <div>
                 <button class="btn" type="button">
-                    <i class="bi bi-globe text-2xl">
+                    <i class="bi bi-globe text-2xl"></i>
                     <span class="text-lg ">English (US)</span>
-                    </i>
                 </button>
             </div>
             
             <div class="text-2xl">
-                <a target="_blank" href="https://twitter.com/elvin1803"><i class="bi bi-envelope"></i></a>
-                <a target="_blank" href="https://twitter.com/elvin1803"><i class="bi bi-facebook"></i></a>
-                <a target="_blank" href="https://twitter.com/Darrizard"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-arrow-up-short"></i></a>
+                <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-envelope"></i></a>
+                <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-facebook"></i></a>
+                <a target="_blank" href="https://i.kym-cdn.com/entries/icons/original/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.png"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-arrow-up font-extrabold"></i></a>
             </div>
         </footer>
         
     </div>
+    
+    <!-- Copyright stuff -->
+    <p class=" my-2 mb-2 mx-2">Website by group 9 | 2023</p>
 </div>
-
-
-<!-- Copyright -->
-<span class="py-2 mx-36">Website by us</span>
+</div>

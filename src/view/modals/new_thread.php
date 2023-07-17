@@ -39,20 +39,32 @@ $('#newThreadForm').on('submit', function(event) {
   event.preventDefault(); // Prevent form from submitting normally
   
   // Gather form data
+  var title = $('#threadTitle').val();
+  var content = quill.root.innerHTML;
+  var topicId = <?php echo json_encode($topicId); ?>; // Pass the topic ID from PHP to JavaScript
+  
+  // Check if the editor content is empty
+  if (title.trim() === '' || content.trim() === '') {
+    if (title.trim() === '' && content.trim() === '') {
+      alert('Please enter a title and content for the thread.');
+      return;
+    }
+  }
+  
   var formData = {
-    title: $('#threadTitle').val(),
-    content: quill.root.innerHTML,
-    topicId: <?php echo $topicId; ?> // Pass the topic ID from PHP to JavaScript
+    title: title,
+    content: content,
+    topicId: topicId
   };
   
   $.ajax({
-    url: '/WebProgramming-FinalProject/src/model/ajax/create_thread.php',
+    url: '/finalteam9/src/model/ajax/create_thread.php',
     type: 'POST',
     data: formData,
     dataType: 'json',
     success: function(response) {
       console.log('Thread created successfully:', response);
-      var threadUrl = '/WebProgramming-FinalProject/threads/' + response.data.title + '.' + response.data.thread_id + '?page=1'; // Replace with the actual URL structure for your thread pages
+      var threadUrl = '/finalteam9/?route=threads&id=' + response.data.thread_id + '?page=1'; // Replace with the actual URL structure for your thread pages
       window.location.href = threadUrl;
     },
     error: function(xhr, status, error) {
@@ -61,3 +73,4 @@ $('#newThreadForm').on('submit', function(event) {
   });
 });
 </script>
+
