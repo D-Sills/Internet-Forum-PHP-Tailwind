@@ -85,15 +85,32 @@ function generate_avatar($user, $image_size = '50px') {
     return $avatar_html;
 }
 
-function searchForum($searchQuery) {
+function searchForum($searchQuery, $searchType) {
     global $db;
 
-    // Perform your database query here to search for matching posts
-    // Modify the SQL query according to your database schema and search requirements
-    $query = "SELECT p.*, t.thread_id 
-                FROM posts p 
-                INNER JOIN threads t ON p.thread_id = t.thread_id 
-                WHERE p.post_content LIKE :search_query";
+    // Modify the SQL query based on the search type
+    $query = "";
+    switch ($searchType) {
+        case 'Threads':
+            $query = "SELECT t.*, COUNT(p.post_id) AS post_count
+                        FROM threads t
+                        LEFT JOIN posts p ON t.thread_id = p.thread_id
+                        WHERE t.thread_name LIKE :search_query
+                        GROUP BY t.thread_id";
+            break;
+        case 'Posts':
+            $query = "SELECT p.*, t.thread_id 
+                        FROM posts p 
+                        INNER JOIN threads t ON p.thread_id = t.thread_id 
+                        WHERE p.post_content LIKE :search_query";
+            break;
+        case 'Members':
+            $query = "SELECT * FROM users WHERE username LIKE :search_query";
+            break;
+        default:
+            // Invalid search type, return an empty array
+            return [];
+    }
 
     $statement = $db->prepare($query);
     $statement->bindValue(':search_query', "%{$searchQuery}%");

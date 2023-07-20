@@ -32,8 +32,6 @@ h2, h3, h4 {
   display: none !important;
 }
 
-
-
 /* Body */
   /* Style the banner container */
   #banner {
@@ -111,14 +109,16 @@ h2, h3, h4 {
     color: #595a65;
   }
 
+/* odd-even color difference */
 .odd-even:nth-child(even) {
   background-color: #f8f8f8;
 }
 
+/* make that shit a circle */
 .avatar {
   border-radius: 50%;
 }
-
+/* div used in posts, that displays the user data */
 .user-section {
   border-right: 2px solid rgb(220, 216, 216);
   justify-content: center;
@@ -127,11 +127,13 @@ h2, h3, h4 {
   background-color: #ebe9e9;
 }
 
+/* general reusable drop shadow stuff */
 .drop-shadow {
   filter: drop-shadow(1px 1px 2px #00000032);
   background-color: white;
 }
 
+/* quill editor */
 #replyEditor {
   height: 100px;
   display: flex;
@@ -139,4 +141,3 @@ h2, h3, h4 {
   justify-content: flex-start;
   align-items: stretch;
 }
-

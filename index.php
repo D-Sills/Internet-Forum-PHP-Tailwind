@@ -33,6 +33,7 @@ switch ($requestRoute) {
         break;
     case 'search':
         $searchQuery = $_GET['query'] ?? '';
+        $searchType = $_GET['type'] ?? '';
         include __DIR__ . '/src/controller/search_controller.php';
         break;
     default:

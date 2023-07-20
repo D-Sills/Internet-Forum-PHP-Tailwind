@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../model/posts_db.php';
+require_once __DIR__ . '/../model/users_db.php';
 
-$searchResults = searchForum($searchQuery);
+$searchResults = searchForum($searchQuery, $searchType);
 $title = "Search Results";
 
 include __DIR__ .'/../view/header.php';

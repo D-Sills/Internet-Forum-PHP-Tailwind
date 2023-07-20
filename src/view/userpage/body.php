@@ -18,7 +18,21 @@
                 ?>
             </div>
             <div class="w-100">
-                <h2 class="text-2xl mb-1"><?php echo $got_user['username']; ?></h2>
+                <h2 class="text-2xl mb-1"><?php 
+                echo $got_user['username']; 
+                switch ($got_user['privilege']) {
+                    case 'moderator':
+                        echo '<span class="ml-2 badge text-bg-success">Moderator</span>';
+                        break;
+                    case 'admin':
+                        echo '<span class="ml-2 badge text-bg-danger">Administrator</span>';
+                        break;
+                    default:
+                        // Handle the default case here
+                        break;
+                }
+                ?>
+                </h2>
                 
                 <span>Total Posts: <?php echo $stats['total_posts']; ?></span>
                 <span>Likes Received: <?php echo $stats['total_likes']; ?></span>
